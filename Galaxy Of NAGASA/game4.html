@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÍÌÑÉ æÑŞÉ ãŞÕ</title>
+    <title>Ø­Ø¬Ø±Ø© ÙˆØ±Ù‚Ø© Ù…Ù‚Øµ</title>
     <style>
+    body {
+    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -75,14 +79,14 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>ÍÌÑÉ æÑŞÉ ãŞÕ</h1>
+        <h1>Ø­Ø¬Ø±Ø© ÙˆØ±Ù‚Ø© Ù…Ù‚Øµ</h1>
         <div class="choices">
-            <button onclick="playGame('ÍÌÑÉ')">?? ÍÌÑÉ</button>
-            <button onclick="playGame('æÑŞÉ')">?? æÑŞÉ</button>
-            <button onclick="playGame('ãŞÕ')">? ãŞÕ</button>
+            <button onclick="playGame('Ø­Ø¬Ø±Ø©')">ğŸª¨ Ø­Ø¬Ø±Ø©</button>
+            <button onclick="playGame('ÙˆØ±Ù‚Ø©')">ğŸ“„ ÙˆØ±Ù‚Ø©</button>
+            <button onclick="playGame('Ù…Ù‚Øµ')">âœ‚ Ù…Ù‚Øµ</button>
         </div>
         <p id="result"></p>
-        <button class="back-button" onclick="goBack()">? ÇáÑÌæÚ</button>
+        <button class="back-button" onclick="goBack()">â¬… Ø§Ù„Ø±Ø¬ÙˆØ¹</button>
     </div>
     
     <div class="scare-image" id="scare">
@@ -91,24 +95,24 @@
     
     <script>
         function playGame(userChoice) {
-            const choices = ['ÍÌÑÉ', 'æÑŞÉ', 'ãŞÕ'];
+            const choices = ['Ø­Ø¬Ø±Ø©', 'ÙˆØ±Ù‚Ø©', 'Ù…Ù‚Øµ'];
             const computerChoice = choices[Math.floor(Math.random() * 3)];
             let result = "";
             
             if (userChoice === computerChoice) {
-                result = "ÊÚÇÏá! ??";
+                result = "ØªØ¹Ø§Ø¯Ù„! ğŸ¤";
             } else if (
-                (userChoice === "ÍÌÑÉ" && computerChoice === "ãŞÕ") ||
-                (userChoice === "æÑŞÉ" && computerChoice === "ÍÌÑÉ") ||
-                (userChoice === "ãŞÕ" && computerChoice === "æÑŞÉ")
+                (userChoice === "Ø­Ø¬Ø±Ø©" && computerChoice === "Ù…Ù‚Øµ") ||
+                (userChoice === "ÙˆØ±Ù‚Ø©" && computerChoice === "Ø­Ø¬Ø±Ø©") ||
+                (userChoice === "Ù…Ù‚Øµ" && computerChoice === "ÙˆØ±Ù‚Ø©")
             ) {
-                result = "áŞÏ İÒÊ! ??";
+                result = "Ù„Ù‚Ø¯ ÙØ²Øª! ğŸ‰";
             } else {
-                result = "áŞÏ ÎÓÑÊ! ??";
+                result = "Ù„Ù‚Ø¯ Ø®Ø³Ø±Øª! ğŸ˜¢";
                 showScare();
             }
             
-            document.getElementById("result").innerText = `ÇÎÊíÇÑß: ${userChoice} | ÇÎÊíÇÑ ÇáßãÈíæÊÑ: ${computerChoice} \n${result}`;
+            document.getElementById("result").innerText = `Ø§Ø®ØªÙŠØ§Ø±Ùƒ: ${userChoice} | Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„ÙƒÙ…Ø¨ÙŠÙˆØªØ±: ${computerChoice} \n${result}`;
         }
 
         function showScare() {
