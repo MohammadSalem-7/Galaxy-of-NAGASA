@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAGASA - «·’›Õ… «·—∆Ì”Ì…</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/0.webp') repeat;
+            animation: moveStars 50s linear infinite;
+        }
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 10000px 10000px; }
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px cyan;
+        }
+        .nav {
+            margin-top: 20px;
+        }
+        .nav a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid cyan;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .nav a:hover {
+            background: cyan;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>Galaxy of NAGASA„—Õ»« »ﬂ ›Ì</h1>
+        <div class="nav">
+            <a href="members.html">«·√⁄÷«¡</a>
+            <a href="games.html">«·√·⁄«»</a>
+            <a href="exercises.html">«· „«—Ì‰</a>
+        </div>
+    </div>
+</body>
+</html>

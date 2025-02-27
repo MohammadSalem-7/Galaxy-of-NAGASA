@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ÕœÌ «·‰ﬁ—</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        body {
+            background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/0000.webp') repeat;
+            color: white;
+            overflow: hidden;
+        }
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .click-button {
+            padding: 20px 40px;
+            font-size: 2rem;
+            background: cyan;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .click-button:hover {
+            background: blue;
+            color: white;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, cyan, blue);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+        .back-button:hover {
+            background: linear-gradient(45deg, blue, cyan);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1> ÕœÌ «·‰ﬁ—!</h1>
+        <p>«‰ﬁ— «·“— »√”—⁄ „« Ì„ﬂ‰ Œ·«· 10 ÀÊ«‰Ú!</p>
+        <button class="click-button" id="clickButton" onclick="countClick()">«‰ﬁ— Â‰«</button>
+        <p id="clickCount">«·‰ﬁ—« : 0</p>
+        <button class="back-button" onclick="goHome()">? «·—ÃÊ⁄</button>
+    </div>
+
+    <script>
+        let clicks = 0;
+        let gameStarted = false;
+        let timer;
+
+        function countClick() {
+            if (!gameStarted) {
+                gameStarted = true;
+                clicks = 0;
+                document.getElementById("clickCount").innerText = "«·‰ﬁ—« : " + clicks;
+                timer = setTimeout(endGame, 10000);
+            }
+            clicks++;
+            document.getElementById("clickCount").innerText = "«·‰ﬁ—« : " + clicks;
+        }
+
+        function endGame() {
+            gameStarted = false;
+            alert("«‰ ÂÏ «·Êﬁ ! ·ﬁœ ‰ﬁ—  " + clicks + " „—…!");
+        }
+
+        function goHome() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

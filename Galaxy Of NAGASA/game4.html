@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÕÃ—… Ê—ﬁ… „ﬁ’</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        body {
+            background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/a.webp') repeat;
+            color: white;
+        }
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .choices button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1.5rem;
+            background: cyan;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .choices button:hover {
+            background: blue;
+            color: white;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, cyan, blue);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .back-button:hover {
+            background: linear-gradient(45deg, blue, cyan);
+            transform: scale(1.1);
+        }
+        .scare-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .scare-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>ÕÃ—… Ê—ﬁ… „ﬁ’</h1>
+        <div class="choices">
+            <button onclick="playGame('ÕÃ—…')">?? ÕÃ—…</button>
+            <button onclick="playGame('Ê—ﬁ…')">?? Ê—ﬁ…</button>
+            <button onclick="playGame('„ﬁ’')">? „ﬁ’</button>
+        </div>
+        <p id="result"></p>
+        <button class="back-button" onclick="goBack()">? «·—ÃÊ⁄</button>
+    </div>
+    
+    <div class="scare-image" id="scare">
+        <img src="https://assets.onecompiler.app/42ydxf8da/43ab8e573/5.jpeg" alt="Scary Image">
+    </div>
+    
+    <script>
+        function playGame(userChoice) {
+            const choices = ['ÕÃ—…', 'Ê—ﬁ…', '„ﬁ’'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result = "";
+            
+            if (userChoice === computerChoice) {
+                result = " ⁄«œ·! ??";
+            } else if (
+                (userChoice === "ÕÃ—…" && computerChoice === "„ﬁ’") ||
+                (userChoice === "Ê—ﬁ…" && computerChoice === "ÕÃ—…") ||
+                (userChoice === "„ﬁ’" && computerChoice === "Ê—ﬁ…")
+            ) {
+                result = "·ﬁœ ›“ ! ??";
+            } else {
+                result = "·ﬁœ Œ”— ! ??";
+                showScare();
+            }
+            
+            document.getElementById("result").innerText = `«Œ Ì«—ﬂ: ${userChoice} | «Œ Ì«— «·ﬂ„»ÌÊ —: ${computerChoice} \n${result}`;
+        }
+
+        function showScare() {
+            const scareElement = document.getElementById("scare");
+            scareElement.style.display = "flex";
+            setTimeout(() => {
+                scareElement.style.display = "none";
+            }, 2000);
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

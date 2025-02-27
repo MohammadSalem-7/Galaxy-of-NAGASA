@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>·⁄»… —œ «·›⁄· «·”—Ì⁄</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        body {
+            background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/s.webp') repeat;
+            color: white;
+            overflow: hidden;
+        }
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .box {
+            width: 150px;
+            height: 150px;
+            background: red;
+            display: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .start-btn {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            background: cyan;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .start-btn:hover {
+            background: blue;
+            color: white;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, cyan, blue);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .back-button:hover {
+            background: linear-gradient(45deg, blue, cyan);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>«Œ »— ”—⁄… —œ ›⁄·ﬂ!</h1>
+        <button class="start-btn" onclick="startGame()">«»œ√ «··⁄»…</button>
+        <div class="box" id="reactionBox" onclick="stopTimer()"></div>
+        <p id="result"></p>
+        <button class="back-button" onclick="history.back()">? «·—ÃÊ⁄</button>
+    </div>
+
+    <script>
+        let startTime, endTime;
+        function startGame() {
+            document.getElementById("result").innerText = "";
+            document.getElementById("reactionBox").style.display = "none";
+            let randomTime = Math.random() * 4000 + 1000;
+            setTimeout(() => {
+                startTime = Date.now();
+                document.getElementById("reactionBox").style.display = "block";
+                document.getElementById("reactionBox").style.background = "red";
+            }, randomTime);
+        }
+
+        function stopTimer() {
+            endTime = Date.now();
+            let reactionTime = (endTime - startTime) / 1000;
+            document.getElementById("reactionBox").style.display = "none";
+            document.getElementById("result").innerText = `“„‰ —œ ›⁄·ﬂ: ${reactionTime} À«‰Ì…!`;
+        }
+    </script>
+</body>
+</html>

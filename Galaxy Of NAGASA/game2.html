@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>·⁄»… «·√”∆·… «·⁄«„…</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        body {
+            background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/%5D.webp') repeat;
+            color: white;
+            overflow: hidden;
+        }
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .question-box {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 15px cyan;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        .options button, .back-button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1.2rem;
+            background: cyan;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .options button:hover, .back-button:hover {
+            background: blue;
+            color: white;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>·⁄»… «·√”∆·… «·⁄«„…</h1>
+        <div class="question-box" id="questionBox">«÷€ÿ ⁄·Ï “— «·»œ¡ ·⁄—÷ «·”ƒ«·</div>
+        <div class="options" id="optionsContainer"></div>
+        <button onclick="nextQuestion()">«·”ƒ«· «· «·Ì</button>
+        <button class="back-button" onclick="goBack()">«·—ÃÊ⁄</button>
+        <p class="result" id="result"></p>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "„« ÂÊ √”—⁄ ÕÌÊ«‰ ⁄·Ï ÊÃÂ «·√—÷ø", options: ["«·›Âœ", "«·√”œ", "«·‰”—", "«·√—‰»"], answer: "«·›Âœ" },
+            { question: "„« ÂÊ ⁄«’„… ›—‰”«ø", options: ["—Ê„«", "„œ—Ìœ", "»«—Ì”", "»—·Ì‰"], answer: "»«—Ì”" },
+            { question: "ﬂ„ ⁄œœ «·ﬂÊ«ﬂ» ›Ì «·„Ã„Ê⁄… «·‘„”Ì…ø", options: ["7", "8", "9", "10"], answer: "8" },
+            { question: "„« ÂÊ «·⁄‰’— «·ﬂÌ„Ì«∆Ì «·–Ì Ì—„“ ·Â »‹ Oø", options: ["√Êﬂ”ÃÌ‰", "–Â»", "›÷…", "ÕœÌœ"], answer: "√Êﬂ”ÃÌ‰" },
+            { question: "„‰ ÂÊ „Œ —⁄ «·„’»«Õ «·ﬂÂ—»«∆Ìø", options: ["√œÌ”Ê‰", "√Ì‰‘ «Ì‰", "‰ÌÊ ‰", "„«—ﬂÊ‰Ì"], answer: "√œÌ”Ê‰" },
+            { question: "√Ì‰  ﬁ⁄ «·√Â—«„« ø", options: ["„’—", "«·”⁄ÊœÌ…", "«·⁄—«ﬁ", "«·„€—»"], answer: "„’—" },
+            { question: "„« ÂÊ «·ÕÌÊ«‰ «·–Ì Ì‰«„ Ê⁄Ì‰«Â „› ÊÕ «‰ø", options: ["«· „”«Õ", "«·–∆»", "«·√—‰»", "«·»Ê„…"], answer: "«·√—‰»" },
+            { question: "ﬂ„ ⁄œœ √”‰«‰ «·≈‰”«‰ «·»«·€ø", options: ["28", "30", "32", "34"], answer: "32" },
+            { question: "„« ÂÊ √ﬂ»— ﬂÊﬂ» ›Ì «·„Ã„Ê⁄… «·‘„”Ì…ø", options: ["«·„‘ —Ì", "“Õ·", "‰» Ê‰", "«·√—÷"], answer: "«·„‘ —Ì" },
+            { question: "„‰ ÂÊ ﬂ« » „”—ÕÌ… Â«„· ø", options: ["‘ﬂ”»Ì—", "œÊ” ÊÌ›”ﬂÌ", " Ê·” ÊÌ", "‰ÃÌ» „Õ›ÊŸ"], answer: "‘ﬂ”»Ì—" },
+            { question: "„« ÂÊ «·»Õ— «·–Ì Ì”„Ï «·»Õ— «·„Ì ø", options: ["«·»Õ— «·√Õ„—", "«·»Õ— «·„Ì ", "«·»Õ— «·√”Êœ", "»Õ— ﬁ“ÊÌ‰"], answer: "«·»Õ— «·„Ì " },
+            { question: "„« ÂÊ √ﬂ»— „ÕÌÿ ›Ì «·⁄«·„ø", options: ["«·„ÕÌÿ «·Â«œÌ", "«·„ÕÌÿ «·√ÿ·”Ì", "«·„ÕÌÿ «·Â‰œÌ", "«·„ÕÌÿ «·„ Ã„œ «·Ã‰Ê»Ì"], answer: "«·„ÕÌÿ «·Â«œÌ" },
+            { question: "„‰ ÂÊ √Ê· —∆Ì” ··Ê·«Ì«  «·„ Õœ…ø", options: ["Ê«‘‰ÿ‰", "·Ì‰ﬂÊ·‰", "—Ê“›· ", "ﬂÌ‰ÌœÌ"], answer: "Ê«‘‰ÿ‰" },
+            { question: "„« ÂÌ ⁄«’„… «·Ì«»«‰ø", options: ["ÿÊﬂÌÊ", "”ÌÊ·", "»ﬂÌ‰", " «Ì»ÌÂ"], answer: "ÿÊﬂÌÊ" },
+            { question: "√Ì ﬂÊﬂ» Ì⁄—› »«·ﬂÊﬂ» «·√Õ„—ø", options: ["«·„—ÌŒ", "«·“Â—…", "«·„‘ —Ì", "⁄ÿ«—œ"], answer: "«·„—ÌŒ" }
+        ];
+        let currentQuestionIndex = -1;
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= questions.length) {
+                document.getElementById("questionBox").innerText = "«‰ Â  «·√”∆·…!";
+                document.getElementById("optionsContainer").innerHTML = "";
+                return;
+            }
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("questionBox").innerText = currentQuestion.question;
+            let optionsHTML = "";
+            currentQuestion.options.forEach(option => {
+                optionsHTML += `<button onclick='checkAnswer("${option}")'>${option}</button>`;
+            });
+            document.getElementById("optionsContainer").innerHTML = optionsHTML;
+        }
+
+        function checkAnswer(selected) {
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            if (selected === correctAnswer) {
+                document.getElementById("result").innerText = "≈Ã«»… ’ÕÌÕ…! ?";
+            } else {
+                document.getElementById("result").innerText = "—ÊÕ ‰«„  ‘ÊÌÂ Ì«„Ì  ?";
+            }
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

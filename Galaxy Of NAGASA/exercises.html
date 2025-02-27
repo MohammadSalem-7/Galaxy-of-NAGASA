@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy of NAGASA  „«—Ì‰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        body {
+            background: url('https://assets.onecompiler.app/42ydxf8da/42z7st46n/image.png') repeat;
+            color: white;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .exercise-box {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .start-btn {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            background: cyan;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .start-btn:hover {
+            background: blue;
+            color: white;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, cyan, blue);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+        .back-button:hover {
+            background: linear-gradient(45deg, blue, cyan);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> „«—Ì‰ Galaxy of NAGASA</h1>
+        <div class="exercise-box" id="exercise">«÷€ÿ ⁄·Ï “— «·»œ¡ ··Õ’Ê· ⁄·Ï  „—Ì‰!</div>
+        <button class="start-btn" onclick="generateExercise()">«»œ√ «· „—Ì‰</button>
+        <button class="back-button" onclick="history.back()">? «·—ÃÊ⁄</button>
+    </div>
+
+    <script>
+        const exercises = [
+            "«ﬁ›“ 10 „—« !",
+            "ﬁ„ »‹ 5  „—Ì‰«  ÷€ÿ!",
+            "ﬁ„ »«·Ã—Ì ›Ì „ﬂ«‰ﬂ ·„œ… 15 À«‰Ì…!",
+            "ﬁ„ »‹ 10  „—Ì‰«  »ÿ‰!",
+            " „œœ ·„œ… 20 À«‰Ì…!",
+            "«Ã·” ›Ì Ê÷⁄Ì… «·ﬁ—›’«¡ 5 „—« !"
+        ];
+        
+        function generateExercise() {
+            let randomIndex = Math.floor(Math.random() * exercises.length);
+            document.getElementById("exercise").innerText = exercises[randomIndex];
+        }
+    </script>
+</body>
+</html>
