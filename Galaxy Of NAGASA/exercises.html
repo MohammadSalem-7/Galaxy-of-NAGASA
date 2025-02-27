@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxy of NAGASA ������</title>
+    <title>Galaxy of NAGASA تمارين</title>
     <style>
+    body {
+    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -62,20 +66,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>������ Galaxy of NAGASA</h1>
-        <div class="exercise-box" id="exercise">���� ��� �� ����� ������ ��� �����!</div>
-        <button class="start-btn" onclick="generateExercise()">���� �������</button>
-        <button class="back-button" onclick="history.back()">? ������</button>
+        <h1>تمارين Galaxy of NAGASA</h1>
+        <div class="exercise-box" id="exercise">اضغط على زر البدء للحصول على تمرين!</div>
+        <button class="start-btn" onclick="generateExercise()">ابدأ التمرين</button>
+        <button class="back-button" onclick="history.back()">⬅ الرجوع</button>
     </div>
 
     <script>
         const exercises = [
-            "���� 10 ����!",
-            "�� �� 5 ������� ���!",
-            "�� ������ �� ����� ���� 15 �����!",
-            "�� �� 10 ������� ���!",
-            "���� ���� 20 �����!",
-            "���� �� ����� �������� 5 ����!"
+            "اقفز 10 مرات!",
+            "قم بـ 5 تمرينات ضغط!",
+            "قم بالجري في مكانك لمدة 15 ثانية!",
+            "قم بـ 10 تمرينات بطن!",
+            "تمدد لمدة 20 ثانية!",
+            "اجلس في وضعية القرفصاء 5 مرات!"
         ];
         
         function generateExercise() {
