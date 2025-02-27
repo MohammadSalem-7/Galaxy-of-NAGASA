@@ -5,20 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حجرة ورقة مقص</title>
     <style>
-    body {
-    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
-}
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
         body {
+            font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
             background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/a.webp') repeat;
             color: white;
+            text-align: center;
         }
         .game-container {
             display: flex;
@@ -69,6 +60,7 @@
             display: none;
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
         .scare-image img {
             width: 100%;
@@ -91,6 +83,7 @@
     
     <div class="scare-image" id="scare">
         <img src="https://assets.onecompiler.app/42ydxf8da/43ab8e573/5.jpeg" alt="Scary Image">
+        <audio id="scareSound" src="medoo.mp3" preload="auto"></audio>
     </div>
     
     <script>
@@ -117,7 +110,11 @@
 
         function showScare() {
             const scareElement = document.getElementById("scare");
+            const scareSound = document.getElementById("scareSound");
+            
             scareElement.style.display = "flex";
+            scareSound.play().catch(error => console.log("فشل تشغيل الصوت:", error));
+            
             setTimeout(() => {
                 scareElement.style.display = "none";
             }, 2000);
