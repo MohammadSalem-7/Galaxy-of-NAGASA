@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>áÚÈÉ ÑÏ ÇáİÚá ÇáÓÑíÚ</title>
+    <title>Ù„Ø¹Ø¨Ø© Ø±Ø¯ Ø§Ù„ÙØ¹Ù„ Ø§Ù„Ø³Ø±ÙŠØ¹</title>
     <style>
+    body {
+    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -67,11 +71,11 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>ÇÎÊÈÑ ÓÑÚÉ ÑÏ İÚáß!</h1>
-        <button class="start-btn" onclick="startGame()">ÇÈÏÃ ÇááÚÈÉ</button>
+        <h1>Ø§Ø®ØªØ¨Ø± Ø³Ø±Ø¹Ø© Ø±Ø¯ ÙØ¹Ù„Ùƒ!</h1>
+        <button class="start-btn" onclick="startGame()">Ø§Ø¨Ø¯Ø£ Ø§Ù„Ù„Ø¹Ø¨Ø©</button>
         <div class="box" id="reactionBox" onclick="stopTimer()"></div>
         <p id="result"></p>
-        <button class="back-button" onclick="history.back()">? ÇáÑÌæÚ</button>
+        <button class="back-button" onclick="history.back()">â¬… Ø§Ù„Ø±Ø¬ÙˆØ¹</button>
     </div>
 
     <script>
@@ -91,7 +95,7 @@
             endTime = Date.now();
             let reactionTime = (endTime - startTime) / 1000;
             document.getElementById("reactionBox").style.display = "none";
-            document.getElementById("result").innerText = `Òãä ÑÏ İÚáß: ${reactionTime} ËÇäíÉ!`;
+            document.getElementById("result").innerText = `Ø²Ù…Ù† Ø±Ø¯ ÙØ¹Ù„Ùƒ: ${reactionTime} Ø«Ø§Ù†ÙŠØ©!`;
         }
     </script>
 </body>
