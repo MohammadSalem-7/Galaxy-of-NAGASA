@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÊÍÏí ÇáäŞÑ</title>
+    <title>ØªØ­Ø¯ÙŠ Ø§Ù„Ù†Ù‚Ø±</title>
     <style>
+    body {
+    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -56,11 +60,11 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>ÊÍÏí ÇáäŞÑ!</h1>
-        <p>ÇäŞÑ ÇáÒÑ ÈÃÓÑÚ ãÇ íãßä ÎáÇá 10 ËæÇäò!</p>
-        <button class="click-button" id="clickButton" onclick="countClick()">ÇäŞÑ åäÇ</button>
-        <p id="clickCount">ÇáäŞÑÇÊ: 0</p>
-        <button class="back-button" onclick="goHome()">? ÇáÑÌæÚ</button>
+        <h1>ØªØ­Ø¯ÙŠ Ø§Ù„Ù†Ù‚Ø±!</h1>
+        <p>Ø§Ù†Ù‚Ø± Ø§Ù„Ø²Ø± Ø¨Ø£Ø³Ø±Ø¹ Ù…Ø§ ÙŠÙ…ÙƒÙ† Ø®Ù„Ø§Ù„ 10 Ø«ÙˆØ§Ù†Ù!</p>
+        <button class="click-button" id="clickButton" onclick="countClick()">Ø§Ù†Ù‚Ø± Ù‡Ù†Ø§</button>
+        <p id="clickCount">Ø§Ù„Ù†Ù‚Ø±Ø§Øª: 0</p>
+        <button class="back-button" onclick="goHome()">â¬… Ø§Ù„Ø±Ø¬ÙˆØ¹</button>
     </div>
 
     <script>
@@ -72,16 +76,16 @@
             if (!gameStarted) {
                 gameStarted = true;
                 clicks = 0;
-                document.getElementById("clickCount").innerText = "ÇáäŞÑÇÊ: " + clicks;
+                document.getElementById("clickCount").innerText = "Ø§Ù„Ù†Ù‚Ø±Ø§Øª: " + clicks;
                 timer = setTimeout(endGame, 10000);
             }
             clicks++;
-            document.getElementById("clickCount").innerText = "ÇáäŞÑÇÊ: " + clicks;
+            document.getElementById("clickCount").innerText = "Ø§Ù„Ù†Ù‚Ø±Ø§Øª: " + clicks;
         }
 
         function endGame() {
             gameStarted = false;
-            alert("ÇäÊåì ÇáæŞÊ! áŞÏ äŞÑÊ " + clicks + " ãÑÉ!");
+            alert("Ø§Ù†ØªÙ‡Ù‰ Ø§Ù„ÙˆÙ‚Øª! Ù„Ù‚Ø¯ Ù†Ù‚Ø±Øª " + clicks + " Ù…Ø±Ø©!");
         }
 
         function goHome() {
