@@ -48,34 +48,68 @@
             background: #00ff00;
             color: black;
         }
+        .input-box {
+            background: black;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+            width: 250px;
+        }
+        .files-container {
+            text-align: left;
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
+
+    <input type="text" id="targetName" class="input-box" placeholder="أدخل اسم الضحية أو رقمه 😈">
     <button class="hack-btn" onclick="startHacking()">Start Hacking</button>
+
     <div class="matrix-container">
         <p id="matrixText" class="matrix-text" style="display: none;"></p>
     </div>
+
+    <div class="files-container" id="filesContainer"></div>
+
     <audio id="hackSound" src="hhhh.mp3"></audio>
 
     <script>
         function startHacking() {
             document.getElementById("hackSound").play();
+            const target = document.getElementById("targetName").value || "Unknown Target";
+
             const messages = [
-                "Extracting data to Mohammad Salem...",
-                "Accessing system files: C:\\Windows\\System32\\",
-                "Accessing Android data: /storage/emulated/0/",
-                "Retrieving user credentials...",
-                "Transferring all files to Mohammad Salem...",
-                "....storage/emulated/0/",
-                    "....storage/emulated/2",
-                        ".....storage/emulated/456",
-                 "All done",
-                  "Your device has been hacked by Mohammad Salem "
+                `Extracting data to ${target}...`,
+                `Accessing system files: C:\\Windows\\System32\\`,
+                `Accessing Android data: /storage/emulated/0/${target}/`,
+                `Retrieving credentials of ${target}...`,
+                `Transferring all files from ${target} to Mohammad Salem...`
             ];
+
+            const files = [
+                "C:\\Users\\" + target + "\\Documents\\passwords.txt",
+                "C:\\Windows\\System32\\config.sys",
+                "/storage/emulated/0/DCIM/photos.zip",
+                "/storage/emulated/0/WhatsApp/Databases/msgstore.db",
+                "/storage/emulated/0/Download/private.pdf",
+                "/storage/emulated/0/Android/data/com.facebook.katana/cache",
+                "/storage/emulated/0/Android/data/com.whatsapp/files/key"
+            ];
+
             let index = 0;
             const matrixText = document.getElementById("matrixText");
+            const filesContainer = document.getElementById("filesContainer");
+
             matrixText.style.display = "inline-block";
             matrixText.textContent = "";
+            filesContainer.innerHTML = "";
+            filesContainer.style.display = "none";
 
             function typeMessage(message, callback) {
                 let charIndex = 0;
@@ -94,11 +128,35 @@
                 if (index < messages.length) {
                     typeMessage(messages[index], nextMessage);
                     index++;
+                } else {
+                    showFiles();
                 }
+            }
+
+            function showFiles() {
+                filesContainer.style.display = "block";
+                let fileIndex = 0;
+                
+                function showNextFile() {
+                    if (fileIndex < files.length) {
+                        let fileItem = document.createElement("p");
+                        fileItem.textContent = `[+] Extracting: ${files[fileIndex]}`;
+                        filesContainer.appendChild(fileItem);
+                        fileIndex++;
+                        setTimeout(showNextFile, 800); // كل ملف يظهر بعد 800 مللي ثانية
+                    } else {
+                        setTimeout(() => {
+                            matrixText.textContent = `This device has been hacked by Mohammad Salem, ${target} 👀`;
+                        }, 1500);
+                    }
+                }
+
+                showNextFile();
             }
 
             nextMessage();
         }
     </script>
+
 </body>
 </html>
