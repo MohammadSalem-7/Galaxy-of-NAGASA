@@ -13,7 +13,7 @@
             padding-top: 50px;
         }
         .matrix-container {
-            height: 200px;
+            height: 250px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -26,11 +26,7 @@
             overflow: hidden;
             border-right: 2px solid #00ff00;
             display: inline-block;
-            animation: typing 3s steps(30) forwards, blink 0.5s infinite;
-        }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
+            animation: blink 0.5s infinite;
         }
         @keyframes blink {
             50% { border-color: transparent; }
@@ -48,68 +44,60 @@
             background: #00ff00;
             color: black;
         }
-        .input-box {
-            background: black;
-            color: #00ff00;
-            border: 1px solid #00ff00;
-            padding: 10px;
-            font-size: 16px;
-            text-align: center;
+        .input-container {
             margin-bottom: 10px;
-            width: 250px;
-        }
-        .files-container {
-            text-align: left;
-            display: none;
-            margin-top: 20px;
-            font-size: 18px;
         }
     </style>
 </head>
 <body>
-
-    <input type="text" id="targetName" class="input-box" placeholder="Target IP😈">
+    <div class="input-container">
+        <input type="text" id="targetName" placeholder="Target IP">
+        <select id="deviceType">
+            <option value="Android">Android</option>
+            <option value="iPhone">iPhone</option>
+            <option value="PC">PC</option>
+        </select>
+    </div>
     <button class="hack-btn" onclick="startHacking()">Start Hacking</button>
-
     <div class="matrix-container">
         <p id="matrixText" class="matrix-text" style="display: none;"></p>
     </div>
-
-    <div class="files-container" id="filesContainer"></div>
-
     <audio id="hackSound" src="hhhh.mp3"></audio>
-
     <script>
         function startHacking() {
+            const name = document.getElementById("targetName").value || "Unknown";
+            const device = document.getElementById("deviceType").value;
             document.getElementById("hackSound").play();
-            const target = document.getElementById("targetName").value || "Unknown Target";
-
+            
             const messages = [
-                `Extracting data to ${target}...`,
-                `Accessing system files: C:\\Windows\\System32\\`,
-                `Accessing Android data: /storage/emulated/0/${target}/`,
-                `Retrieving credentials of ${target}...`,
-                `Transferring all files from ${target} to Mohammad Salem...`
+                `Initializing hack on ${name}...`,
+                `Bypassing security on ${device}...`,
+                "Injecting backdoor...",
+                `Accessing ${device} system files...`,
+                "Extracting stored credentials...",
+                "Scanning storage directories...",
+                "Detected Files:",
+                "[📂] System32/Root/KernelData.sys",
+                "[📂] Android/Data/com.securebanking/",
+                "[📂] iPhone/Private/EncryptedBackups/",
+                "[📂] Downloads/HackTools.exe",
+                "[📂] Messages/WhatsAppLogs/",
+                "[📂] Bank Details/CreditCards.txt",
+                "[📂] Cloud Storage/DriveBackups/",
+                "[📂] Social Media/Twitter_Data/",
+                "[📂] Camera/LiveFeeds/",
+                "[📂] Passwords/KeylogRecords.txt",
+                "[⚠] WARNING: Encryption detected... Attempting to decrypt...",
+                "[✔] Decryption successful!", 
+                `Finalizing attack on ${name}'s ${device}...`,
+                "All operations completed successfully!",
+                `${name}'s ${device} has been hacked by Mohammad Salem!`
             ];
-
-            const files = [
-                "C:\\Users\\" + target + "\\Documents\\passwords.txt",
-                "C:\\Windows\\System32\\config.sys",
-                "/storage/emulated/0/DCIM/photos.zip",
-                "/storage/emulated/0/WhatsApp/Databases/msgstore.db",
-                "/storage/emulated/0/Download/private.pdf",
-                "/storage/emulated/0/Android/data/com.facebook.katana/cache",
-                "/storage/emulated/0/Android/data/com.whatsapp/files/key"
-            ];
-
+            
             let index = 0;
             const matrixText = document.getElementById("matrixText");
-            const filesContainer = document.getElementById("filesContainer");
-
             matrixText.style.display = "inline-block";
             matrixText.textContent = "";
-            filesContainer.innerHTML = "";
-            filesContainer.style.display = "none";
 
             function typeMessage(message, callback) {
                 let charIndex = 0;
@@ -119,44 +107,20 @@
                     charIndex++;
                     if (charIndex === message.length) {
                         clearInterval(interval);
-                        setTimeout(callback, 1000);
+                        setTimeout(callback, 800);
                     }
-                }, 100);
+                }, 40);
             }
 
             function nextMessage() {
                 if (index < messages.length) {
                     typeMessage(messages[index], nextMessage);
                     index++;
-                } else {
-                    showFiles();
                 }
-            }
-
-            function showFiles() {
-                filesContainer.style.display = "block";
-                let fileIndex = 0;
-                
-                function showNextFile() {
-                    if (fileIndex < files.length) {
-                        let fileItem = document.createElement("p");
-                        fileItem.textContent = `[+] Extracting: ${files[fileIndex]}`;
-                        filesContainer.appendChild(fileItem);
-                        fileIndex++;
-                        setTimeout(showNextFile, 800); // كل ملف يظهر بعد 800 مللي ثانية
-                    } else {
-                        setTimeout(() => {
-                            matrixText.textContent = `Your device has been hacked by Mohammad Salem, ${target} 👀`;
-                        }, 1500);
-                    }
-                }
-
-                showNextFile();
             }
 
             nextMessage();
         }
     </script>
-
 </body>
 </html>
