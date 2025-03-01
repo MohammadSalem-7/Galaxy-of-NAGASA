@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Hack Effect</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: monospace;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .matrix-container {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .matrix-text {
+            font-size: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+            display: inline-block;
+            animation: typing 3s steps(30) forwards, blink 0.5s infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        .hack-btn {
+            background: black;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .hack-btn:hover {
+            background: #00ff00;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <button class="hack-btn" onclick="startHacking()">Start Hacking</button>
+    <div class="matrix-container">
+        <p id="matrixText" class="matrix-text" style="display: none;"></p>
+    </div>
+    <audio id="hackSound" src="hhhh.mp3"></audio>
+
+    <script>
+        function startHacking() {
+            document.getElementById("hackSound").play();
+            const messages = [
+                "Extracting data to Mohammad Salem...",
+                "Accessing system files: C:\\Windows\\System32\\",
+                "Accessing Android data: /storage/emulated/0/",
+                "Retrieving user credentialsش...",
+                "Transferring all files to Mohammad Salem..."
+            ];
+            let index = 0;
+            const matrixText = document.getElementById("matrixText");
+            matrixText.style.display = "inline-block";
+            matrixText.textContent = "";
+
+            function typeMessage(message, callback) {
+                let charIndex = 0;
+                matrixText.textContent = "";
+                const interval = setInterval(() => {
+                    matrixText.textContent += message[charIndex];
+                    charIndex++;
+                    if (charIndex === message.length) {
+                        clearInterval(interval);
+                        setTimeout(callback, 1000);
+                    }
+                }, 100);
+            }
+
+            function nextMessage() {
+                if (index < messages.length) {
+                    typeMessage(messages[index], nextMessage);
+                    index++;
+                }
+            }
+
+            nextMessage();
+        }
+    </script>
+</body>
+</html>
