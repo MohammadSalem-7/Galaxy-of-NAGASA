@@ -3,96 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Hack Effect</title>
+    <title>Mohammad Salem</title>
     <style>
         body {
             background-color: black;
-            color: #00ff00;
-            font-family: monospace;
+            color: white;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 50px;
-        }
-        .matrix-container {
-            height: 200px;
             overflow: hidden;
+        }
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            width: 60%;
+            margin: 50px auto;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .key {
+            width: 50px;
+            height: 50px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-        }
-        .matrix-text {
+            justify-content: center;
             font-size: 20px;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #00ff00;
-            display: inline-block;
-            animation: typing 3s steps(30) forwards, blink 0.5s infinite;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s, color 0.3s;
+            box-shadow: 0 4px rgba(255, 255, 255, 0.2);
         }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        .hack-btn {
-            background: black;
-            color: #00ff00;
-            border: 1px solid #00ff00;
-            padding: 10px 20px;
+        .matrix-button {
+            margin-top: 20px;
+            padding: 15px 30px;
             font-size: 18px;
+            font-weight: bold;
+            background: crimson;
+            color: white;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
         }
-        .hack-btn:hover {
-            background: #00ff00;
-            color: black;
+        .matrix-button:hover {
+            background: darkred;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <button class="hack-btn" onclick="startHacking()">Start Hacking</button>
-    <div class="matrix-container">
-        <p id="matrixText" class="matrix-text" style="display: none;"></p>
-    </div>
-    <audio id="hackSound" src="hhhh.mp3"></audio>
+    <h1>Mohammad Salem</h1>
+    <div class="keyboard" id="keyboard"></div>
+    <button class="matrix-button" onclick="startMatrix()">Activate Matrix</button>
+     <button onclick="window.location.href='matrix-hack.html'">Start Hacking</button>
+    <canvas id="matrixCanvas"></canvas>
+    <audio id="matrixAudio" src="medo.mp3"></audio>
 
     <script>
-        function startHacking() {
-            document.getElementById("hackSound").play();
-            const messages = [
-                "Extracting data to Mohammad Salem...",
-                "Accessing system files: C:\\Windows\\System32\\",
-                "Accessing Android data: /storage/emulated/0/",
-                "Retrieving user credentialsش...",
-                "Transferring all files to Mohammad Salem..."
-            ];
-            let index = 0;
-            const matrixText = document.getElementById("matrixText");
-            matrixText.style.display = "inline-block";
-            matrixText.textContent = "";
-
-            function typeMessage(message, callback) {
-                let charIndex = 0;
-                matrixText.textContent = "";
-                const interval = setInterval(() => {
-                    matrixText.textContent += message[charIndex];
-                    charIndex++;
-                    if (charIndex === message.length) {
-                        clearInterval(interval);
-                        setTimeout(callback, 1000);
+        const keyboard = document.getElementById("keyboard");
+        const keys = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
+        
+        function getRandomColor() {
+            return `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }
+        
+        keys.forEach(letter => {
+            let key = document.createElement("div");
+            key.classList.add("key");
+            key.textContent = letter;
+            key.style.background = getRandomColor();
+            setInterval(() => {
+                key.style.background = getRandomColor();
+            }, 1000);
+            key.addEventListener("click", () => {
+                key.style.background = "#ff0";
+                key.style.color = "black";
+                setTimeout(() => {
+                    key.style.background = getRandomColor();
+                    key.style.color = "white";
+                }, 300);
+            });
+            keyboard.appendChild(key);
+        });
+        
+        function startMatrix() {
+            document.querySelector("canvas").style.display = "block";
+            const audio = document.getElementById("matrixAudio");
+            audio.play().catch(error => console.log("Audio play failed: ", error));
+            runMatrixEffect();
+        }
+        
+        function runMatrixEffect() {
+            const canvas = document.getElementById("matrixCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const columns = Math.floor(canvas.width / 20);
+            const drops = Array(columns).fill(0);
+            const chars = "01X#*@!$&%ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            function drawMatrix() {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#0F0";
+                ctx.font = "20px monospace";
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.95) {
+                        drops[i] = 0;
                     }
-                }, 100);
-            }
-
-            function nextMessage() {
-                if (index < messages.length) {
-                    typeMessage(messages[index], nextMessage);
-                    index++;
+                    drops[i]++;
                 }
             }
-
-            nextMessage();
+            setInterval(drawMatrix, 50);
         }
     </script>
 </body>
