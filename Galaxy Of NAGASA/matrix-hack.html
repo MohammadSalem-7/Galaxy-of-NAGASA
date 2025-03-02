@@ -63,12 +63,53 @@
         <p id="matrixText" class="matrix-text" style="display: none;"></p>
     </div>
     <audio id="hackSound" src="hhhh.mp3"></audio>
+    
     <script>
         function startHacking() {
             const name = document.getElementById("targetName").value || "Unknown";
             const device = document.getElementById("deviceType").value;
             document.getElementById("hackSound").play();
             
+            let deviceFiles = [];
+
+            switch (device) {
+                case "Android":
+                    deviceFiles = [
+                        "[📂] Android/Data/com.securebanking/",
+                        "[📂] Android/Downloads/HackedApps/",
+                        "[📂] Android/Messages/WhatsAppLogs/",
+                        "[📂] Android/DCIM/Camera/",
+                        "[📂] Android/System/KernelData.sys",
+                        "[⚠] WARNING: Encryption detected... Attempting to decrypt...",
+                        "[✔] Decryption successful!"
+                    ];
+                    break;
+                
+                case "iPhone":
+                    deviceFiles = [
+                        "[📂] iPhone/Private/EncryptedBackups/",
+                        "[📂] iPhone/Messages/iMessage_Logs/",
+                        "[📂] iPhone/DCIM/LivePhotos/",
+                        "[📂] iPhone/Keychain/Passwords/",
+                        "[📂] iPhone/Cloud/iCloudDrive/",
+                        "[⚠] WARNING: iCloud sync detected... Accessing backup...",
+                        "[✔] iCloud Backup retrieved!"
+                    ];
+                    break;
+                
+                case "PC":
+                    deviceFiles = [
+                        "[📂] System32/Root/KernelData.sys",
+                        "[📂] PC/Documents/Passwords.txt",
+                        "[📂] PC/Downloads/HackTools.exe",
+                        "[📂] PC/Desktop/BankDetails/CreditCards.txt",
+                        "[📂] PC/Cloud Storage/DriveBackups/",
+                        "[⚠] WARNING: Firewall detected... Bypassing security...",
+                        "[✔] Firewall bypassed!"
+                    ];
+                    break;
+            }
+
             const messages = [
                 `Initializing hack on ${name}...`,
                 `Bypassing security on ${device}...`,
@@ -76,19 +117,7 @@
                 `Accessing ${device} system files...`,
                 "Extracting stored credentials...",
                 "Scanning storage directories...",
-                "Detected Files:",
-                "[📂] System32/Root/KernelData.sys",
-                "[📂] Android/Data/com.securebanking/",
-                "[📂] iPhone/Private/EncryptedBackups/",
-                "[📂] Downloads/HackTools.exe",
-                "[📂] Messages/WhatsAppLogs/",
-                "[📂] Bank Details/CreditCards.txt",
-                "[📂] Cloud Storage/DriveBackups/",
-                "[📂] Social Media/Twitter_Data/",
-                "[📂] Camera/LiveFeeds/",
-                "[📂] Passwords/KeylogRecords.txt",
-                "[⚠] WARNING: Encryption detected... Attempting to decrypt...",
-                "[✔] Decryption successful!", 
+                ...deviceFiles,
                 `Finalizing attack on ${name}'s ${device}...`,
                 "All operations completed successfully!",
                 `${name}'s ${device} has been hacked by Mohammad Salem!`
