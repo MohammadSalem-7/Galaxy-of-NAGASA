@@ -1,0 +1,110 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://assets.onecompiler.app/42ydxf8da/42z7st46n/cubecircuitchips.jpg'); /* رابط الصورة */
+    background-size: cover; /* لتغطية الصفحة بالكامل */
+    background-position: center; /* لتركيز الصورة */
+}
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.message {
+    margin-top: 15px;
+    color: red;
+}
+
+a {
+    color: #2575fc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* تنسيق الفوتر */
+footer {
+    background-color: #333; /* لون خلفية الفوتر */
+    color: #fff; /* لون النص */
+    padding: 20px 0; /* تباعد داخلي */
+    text-align: center; /* توسيط النص */
+    font-family: Arial, sans-serif; /* خط النص */
+    border-top: 2px solid #444; /* خط علوي */
+    margin-top: 40px; /* تباعد من الأعلى */
+}
+
+.footer-content {
+    max-width: 1200px; /* عرض محتوى الفوتر */
+    margin: 0 auto; /* توسيط المحتوى */
+}
+
+footer p {
+    margin: 5px 0; /* تباعد بين الأسطر */
+    font-size: 14px; /* حجم النص */
+}
+
+footer a {
+    color: #28a745; /* لون الرابط */
+    text-decoration: none; /* إزالة الخط التحتي */
+    transition: color 0.3s ease; /* تأثير تغيير اللون */
+}
+
+footer a:hover {
+    color: #218838; /* لون الرابط عند التحويم */
+}
+
+.designer {
+    font-style: italic; /* جعل النص مائلًا */
+    font-size: 13px; /* حجم نص المصمم */
+}
