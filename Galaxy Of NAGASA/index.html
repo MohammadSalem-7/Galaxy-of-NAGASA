@@ -1,75 +1,61 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxy Of NAGASA تسجيل الدخول</title>
-    <style>
-               body {
-    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
-} 
-
-body {
-
-            background: url('https://assets.onecompiler.app/42ydxf8da/42z7st46n/image.png') repeat;
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .login-container {
-            margin-top: 20vh;
-        }
-        input {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            max-width: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-        }
-        .button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            background: cyan;
-            color: black;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .button:hover {
-            background: magenta;
-        }
-    </style>
+    <title>Galaxy Of NAGASA تسجيل الدخول</title>le>
+    <link rel="stylesheet" href="styless.css">
 </head>
 <body>
+    <div class="container">
+        <!-- نموذج التسجيل -->
+        <div id="signupForm" class="form-container">
+            <h1>NAGASA</h1>
+            <h2>إنشاء حساب جديد</h2>
+            <form id="signup">
+                <div class="input-group">
+                    <label for="newUsername">اسم المستخدم:</label>
+                    <input type="text" id="newUsername" required>
+                </div>
+                <div class="input-group">
+                    <label for="newPassword">كلمة المرور:</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <button type="submit">إنشاء حساب</button>
+            </form>
+            <p>هل لديك حساب بالفعل؟ <a href="#" id="showLogin">تسجيل الدخول</a></p>
+        </div>
 
-    <div class="login-container">
-       <h1>Galaxy Of NAGASA</h1>
-        <h1>تسجيل الدخول</h1>
-        <input type="text" placeholder="اسم المستخدم" id="username">
-        <input type="password" placeholder="كلمة المرور" id="password">
-        <button class="button" onclick="login()">تسجيل الدخول</button>
+        <!-- نموذج تسجيل الدخول -->
+        <div id="loginForm" class="form-container" style="display: none;">
+           <h1>Galaxy Of NAGASA</h1>
+            <h2>تسجيل الدخول</h2>
+            <form id="login">
+                <div class="input-group">
+                    <label for="username">اسم المستخدم:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">كلمة المرور:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">دخول</button>
+            </form>
+            <p>ليس لديك حساب؟ <a href="#" id="showSignup">إنشاء حساب</a></p>
+        </div>
+
+        <!-- رسائل الخطأ أو النجاح -->
+        <p id="message" class="message"></p>
     </div>
 
-    <script>
-        function login() {
-            // يمكن إضافة تحقق من البيانات هنا
-            window.location.href = "first.html"; // تحويل إلى الصفحة الرئيسية
-        }
-    </script>
-    
- <footer>
-        <div class="footer-content">
-            <p>© 2024 - Galaxy Of NAGASA</p>
-            <p class="designer">Developer:<i><b><a href="https://www.facebook.com/mohamed.salemahmed.10236?mibextid=ZbWKwL">Mohammad Salem</a></b></i></p> <!-- تثبيت "Design" باللغة الإنجليزية -->
-        </div>
-    </footer>
+    <script src="script.js"></script>
+
+<footer>
+    <div class="footer-content">
+        <p>© 2024 - Galaxy Of NAGASA</p>
+        <p class="designer">Developer: <i><b><a href="https://www.facebook.com/mohamed.salemahmed.10236?mibextid=ZbWKwL">Mohammad Salem</a></b></i></p>
+    </div>
+</footer>
 
 </body>
 </html>
