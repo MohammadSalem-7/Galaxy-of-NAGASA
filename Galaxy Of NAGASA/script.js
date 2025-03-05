@@ -28,12 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
         showMessage('', 'black');
     });
 
-    // تسجيل حساب جديد
+    // تسجيل حساب جديد (محلي فقط بدون إرسال للخادم)
     signupForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const newUsername = document.getElementById('newUsername').value.trim();
         const newPassword = document.getElementById('newPassword').value.trim();
-        const submitButton = signupForm.querySelector('button[type="submit"]');
 
         // التحقق من الحقول
         if (!newUsername || !newPassword) {
@@ -41,45 +40,21 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // تعطيل الزر أثناء الإرسال
-        submitButton.disabled = true;
-        showMessage('جاري إنشاء الحساب...', 'blue');
+        showMessage('تم إنشاء الحساب محليًا!', 'green');
+        signupForm.reset();
 
-        // إرسال البيانات إلى الخادم
-        fetch('register_process.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: newUsername, password: newPassword })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                showMessage('تم إنشاء الحساب بنجاح!', 'green');
-                signupForm.reset();
-
-                // التبديل إلى نموذج تسجيل الدخول بعد 1.5 ثانية
-                setTimeout(function () {
-                    signupFormContainer.style.display = 'none';
-                    loginFormContainer.style.display = 'block';
-                }, 1500);
-            } else {
-                showMessage(data.message || 'حدث خطأ أثناء إنشاء الحساب!', 'red');
-            }
-        })
-        .catch(() => {
-            showMessage('حدث خطأ في الاتصال بالخادم!', 'red');
-        })
-        .finally(() => {
-            submitButton.disabled = false;
-        });
+        // التبديل إلى نموذج تسجيل الدخول بعد 1.5 ثانية
+        setTimeout(function () {
+            signupFormContainer.style.display = 'none';
+            loginFormContainer.style.display = 'block';
+        }, 1500);
     });
 
-    // تسجيل الدخول
+    // تسجيل الدخول (محلي فقط بدون إرسال للخادم)
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
-        const submitButton = loginForm.querySelector('button[type="submit"]');
 
         // التحقق من الحقول
         if (!username || !password) {
@@ -87,35 +62,12 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // تعطيل الزر أثناء الإرسال
-        submitButton.disabled = true;
-        showMessage('جاري تسجيل الدخول...', 'blue');
+        showMessage('تم تسجيل الدخول محليًا!', 'green');
+        loginForm.reset();
 
-        // إرسال البيانات إلى الخادم
-        fetch('login_process.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                showMessage('تم تسجيل الدخول بنجاح!', 'green');
-                loginForm.reset();
-
-                // تحويل المستخدم إلى الصفحة الرئيسية بعد 1.5 ثانية
-                setTimeout(function () {
-                    window.location.href = 'first.html'; 
-                }, 1500);
-            } else {
-                showMessage(data.message || 'اسم المستخدم أو كلمة المرور غير صحيحة!', 'red');
-            }
-        })
-        .catch(() => {
-            showMessage('حدث خطأ في الاتصال بالخادم!', 'red');
-        })
-        .finally(() => {
-            submitButton.disabled = false;
-        });
+        // تحويل المستخدم إلى الصفحة الرئيسية بعد 1.5 ثانية
+        setTimeout(function () {
+            window.location.href = 'first.html'; 
+        }, 1500);
     });
 });
