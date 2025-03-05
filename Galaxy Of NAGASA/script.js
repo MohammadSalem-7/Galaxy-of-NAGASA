@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function () {
     const signupForm = document.getElementById('signup');
     const loginForm = document.getElementById('login');
@@ -29,17 +28,39 @@ document.addEventListener('DOMContentLoaded', function () {
         const newUsername = document.getElementById('newUsername').value;
         const newPassword = document.getElementById('newPassword').value;
 
-        // التحقق من وجود مستخدم بنفس الاسم
-        if (localStorage.getItem(newUsername)) {
-            message.textContent = 'اسم المستخدم موجود بالفعل!';
+        // عرض رسالة تحميل
+        message.textContent = 'جاري إنشاء الحساب...';
+        message.style.color = 'blue';
+
+        // إرسال البيانات إلى الخادم
+        fetch('register_process.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: newUsername, password: newPassword })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                message.textContent = 'تم إنشاء الحساب بنجاح!';
+                message.style.color = 'green';
+                signupForm.reset();
+
+                // التبديل إلى نموذج تسجيل الدخول بعد إنشاء الحساب
+                setTimeout(function () {
+                    signupFormContainer.style.display = 'none';
+                    loginFormContainer.style.display = 'block';
+                }, 1000); // تأخير 1 ثانية قبل التبديل
+            } else {
+                message.textContent = data.message || 'حدث خطأ أثناء إنشاء الحساب!';
+                message.style.color = 'red';
+            }
+        })
+        .catch(error => {
+            message.textContent = 'حدث خطأ في الاتصال بالخادم!';
             message.style.color = 'red';
-        } else {
-            // حفظ البيانات في localStorage
-            localStorage.setItem(newUsername, newPassword);
-            message.textContent = 'تم إنشاء الحساب بنجاح!';
-            message.style.color = 'green';
-            signupForm.reset();
-        }
+        });
     });
 
     // تسجيل الدخول
@@ -48,20 +69,37 @@ document.addEventListener('DOMContentLoaded', function () {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        // التحقق من البيانات
-        const savedPassword = localStorage.getItem(username);
-        if (savedPassword === password) {
-            message.textContent = 'تم تسجيل الدخول بنجاح!';
-            message.style.color = 'green';
-            loginForm.reset();
+        // عرض رسالة تحميل
+        message.textContent = 'جاري تسجيل الدخول...';
+        message.style.color = 'blue';
 
-            // تحويل المستخدم إلى صفحة أخرى بعد تسجيل الدخول
-            setTimeout(function () {
-                window.location.href = 'first.html'; // اسم الصفحة اللي هيتحول ليها
-            }, 1000); // تأخير 1 ثانية قبل التحويل
-        } else {
-            message.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة!';
+        // إرسال البيانات إلى الخادم
+        fetch('login_process.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                message.textContent = 'تم تسجيل الدخول بنجاح!';
+                message.style.color = 'green';
+                loginForm.reset();
+
+                // تحويل المستخدم إلى صفحة أخرى بعد تسجيل الدخول
+                setTimeout(function () {
+                    window.location.href = 'first.html'; // اسم الصفحة اللي هيتحول ليها
+                }, 1000); // تأخير 1 ثانية قبل التحويل
+            } else {
+                message.textContent = data.message || 'اسم المستخدم أو كلمة المرور غير صحيحة!';
+                message.style.color = 'red';
+            }
+        })
+        .catch(error => {
+            message.textContent = 'حدث خطأ في الاتصال بالخادم!';
             message.style.color = 'red';
-        }
+        });
     });
 });
