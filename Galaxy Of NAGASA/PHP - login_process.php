@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $host = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
-$dbName = "medo.sql";
+$dbName = "medo";
 
 $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
 
