@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ اسمك في القلب ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            margin: 5px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+        .name-container {
+            display: none;
+            position: relative;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .heart-small {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+        }
+        .heart1 { top: -20px; left: -20px; }
+        .heart2 { top: -20px; right: -20px; }
+        .heart3 { bottom: -20px; left: -20px; }
+        .heart4 { bottom: -20px; right: -20px; }
+        
+        @keyframes floating-hearts {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+        .heart-effect {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: floating-hearts 4s linear infinite;
+        }
+        
+        @keyframes fire-effect {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            50% { transform: scale(1.2) translateY(-30px); opacity: 0.7; }
+            100% { transform: scale(1.5) translateY(-60px); opacity: 0; }
+        }
+        .fire-effect {
+            position: absolute;
+            color: orange;
+            font-size: 40px;
+            animation: fire-effect 2s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container" id="inputContainer">
+        <h1>❤️ اكتب اسم الشخص اللي بتحبه ❤️</h1>
+        <input type="text" id="nameInput" placeholder="اكتب الاسم هنا...">
+        <button onclick="showName()">تأكيد</button>
+    </div>
+    <div class="name-container" id="nameContainer">
+        <span id="nameDisplay"></span>
+        <span class="heart-small heart1">❤️</span>
+        <span class="heart-small heart2">❤️</span>
+        <span class="heart-small heart3">❤️</span>
+        <span class="heart-small heart4">❤️</span>
+    </div>
+    
+    <script>
+        function showName() {
+            let name = document.getElementById("nameInput").value;
+            if (name.trim() !== "") {
+                document.getElementById("nameDisplay").textContent = name;
+                document.getElementById("inputContainer").style.display = "none";
+                document.getElementById("nameContainer").style.display = "block";
+                generateHearts();
+                generateFire();
+            }
+        }
+
+        function generateHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("span");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart-effect");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+        
+        function generateFire() {
+            for (let i = 0; i < 10; i++) {
+                let fire = document.createElement("span");
+                fire.innerHTML = "🔥";
+                fire.classList.add("fire-effect");
+                fire.style.left = Math.random() * 100 + "vw";
+                fire.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                document.body.appendChild(fire);
+                setTimeout(() => fire.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
