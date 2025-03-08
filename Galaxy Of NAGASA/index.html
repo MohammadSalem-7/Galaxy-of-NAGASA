@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future AI Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(2,0,36,1) 100%);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            animation: bgShift 10s infinite alternate;
+            touch-action: manipulation;
+        }
+        @keyframes bgShift {
+            0% { background: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(2,0,36,1) 100%); }
+            100% { background: radial-gradient(circle, rgba(36,0,70,1) 20%, rgba(2,0,36,1) 80%); }
+        }
+        .container {
+            margin-top: 20vh;
+            transform: perspective(500px) rotateY(10deg);
+            transition: transform 1s ease-in-out;
+        }
+        .container:hover, .container:active {
+            transform: perspective(500px) rotateY(-10deg);
+        }
+        .glitch {
+            font-size: 3em;
+            font-weight: bold;
+            position: relative;
+            color: cyan;
+            text-shadow: 0px 0px 10px magenta, 0px 0px 20px blue;
+            animation: glitch 0.8s infinite alternate;
+        }
+        @keyframes glitch {
+            0% { transform: translateX(2px) skewX(10deg); }
+            50% { transform: translateX(-2px) skewX(-10deg); }
+            100% { transform: translateX(2px) skewX(10deg); }
+        }
+        .ai-text {
+            font-size: 1.5em;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .neon-button {
+            font-size: 1.5em;
+            padding: 15px 40px;
+            border: none;
+            background: transparent;
+            color: cyan;
+            border: 2px solid cyan;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px cyan;
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,255,255,0.2);
+            top: 0;
+            left: -100%;
+            transition: 0.4s;
+        }
+        .neon-button:hover::before, .neon-button:active::before {
+            left: 100%;
+        }
+        .neon-button:hover, .neon-button:active {
+            background: cyan;
+            color: black;
+            box-shadow: 0 0 20px cyan, 0 0 40px magenta;
+            transform: scale(1.1) rotate(3deg);
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            animation: moveStars 20s linear infinite;
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+        @keyframes warpSpeed {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+        .warp-effect {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 10%, rgba(0,0,0,0) 70%);
+            animation: warpSpeed 0.8s forwards;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <h1 class="glitch">Welcome to the NAGASA</h1>
+        <p class="ai-text">The Revolution Starts Here</p>
+        <button class="neon-button" id="startButton">Explore</button>
+    </div>
+    <script>
+        document.querySelector('#startButton').addEventListener('click', () => {
+            let warp = document.createElement('div');
+            warp.classList.add('warp-effect');
+            document.body.appendChild(warp);
+            
+            document.body.style.animation = 'shake 0.5s ease-in-out';
+            
+            let starExplosion = document.createElement('div');
+            starExplosion.style.position = 'absolute';
+            starExplosion.style.width = '100vw';
+            starExplosion.style.height = '100vh';
+            starExplosion.style.background = 'radial-gradient(circle, rgba(255,255,255,0.9) 5%, rgba(0,0,0,0) 80%)';
+            starExplosion.style.animation = 'warpSpeed 0.8s forwards';
+            document.body.appendChild(starExplosion);
+            
+            setTimeout(() => {
+                window.location.href = 'medoo.html';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
