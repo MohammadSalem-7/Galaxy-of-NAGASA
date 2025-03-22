@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NAGASA - الألعاب</title>
     <style>
-    body {
-    font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
-}
+        body {
+            font-family: 'Tajawal', 'Cairo', 'Arial', sans-serif;
+        }
 
         * {
             margin: 0;
@@ -15,11 +15,13 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+
         body {
             background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/g.webp') repeat;
             color: white;
             text-align: center;
         }
+
         .stars {
             position: fixed;
             width: 100%;
@@ -27,25 +29,30 @@
             background: url('background-stars.png') repeat;
             animation: moveStars 50s linear infinite;
         }
+
         @keyframes moveStars {
             from { background-position: 0 0; }
             to { background-position: 10000px 10000px; }
         }
+
         .container {
             position: relative;
             z-index: 2;
             padding: 20px;
         }
+
         h1 {
             font-size: 3rem;
             text-shadow: 0 0 20px cyan;
         }
+
         .games {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
         }
+
         .game {
             margin: 10px;
             padding: 15px;
@@ -57,10 +64,12 @@
             max-width: 400px;
             transition: 0.3s;
         }
+
         .game:hover {
             background: cyan;
             color: black;
         }
+
         .back-button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -72,6 +81,7 @@
             text-decoration: none;
             transition: 0.3s;
         }
+
         .back-button:hover {
             background: cyan;
             color: black;
@@ -85,14 +95,12 @@
         <div class="games">
             <div class="game" onclick="location.href='game1.html'">لعبة رد الفعل</div>
             <div class="game" onclick="location.href='game2.html'">لعبة الأسئلة العامة</div>
-            <div class="game" onclick="location.href='game3.html'">لعبة تحدي النقر</div
-            <div class="game" onclick="location.href='game5.html'">لعبة الثعبان</div>
-             <div class="game" onclick="location.href='game4.html'">لعبة حجرة ورقه مقص😈</div>
-
+            <div class="game" onclick="location.href='game3.html'">لعبة تحدي النقر</div>
+            <div class="game" onclick="location.href='game4.html'">لعبة حجرة ورقة مقص 😈</div>
+            <div class="game" onclick="location.href='snake.html'">🐍 لعبة الثعبان</div> 
         </div>
-      
+
         <a href="home.html" class="back-button">العودة إلى الصفحة الرئيسية</a>
     </div>
 </body>
 </html>
-          
