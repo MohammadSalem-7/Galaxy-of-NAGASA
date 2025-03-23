@@ -1,24 +1,150 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الثعبان</title>
+    <title>NAGASA XO</title>
     <style>
         body {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: black;
             color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-        canvas {
-            background-color: #222;
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
             margin-top: 20px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cell.taken {
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .restart {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>لعبة الثعبان</h1>
-    <canvas id="gameCanvas" width="600" height="600"></canvas>
-    <script src="snake_game.js"></script>
+    <div class="game-container">
+        <h1>XO {M} </h1>
+        <div class="board" id="board"></div>
+        <div class="status" id="status">Player X's Turn</div>
+        <button class="restart" onclick="restartGame()">Restart Game</button>
+    </div>
+    
+    <script>
+        const board = document.getElementById('board');
+        const status = document.getElementById('status');
+        let cells = [];
+        let currentPlayer = 'X';
+        let gameActive = true;
+        
+        function createBoard() {
+            board.innerHTML = '';
+            cells = [];
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.index = i;
+                cell.addEventListener('click', handleCellClick, { once: true });
+                board.appendChild(cell);
+                cells.push(cell);
+            }
+        }
+        
+        function handleCellClick(event) {
+            if (!gameActive || currentPlayer === 'O') return;
+            const cell = event.target;
+            cell.textContent = currentPlayer;
+            cell.classList.add('taken');
+            if (checkWin()) {
+                status.textContent = `Player ${currentPlayer} Wins!`;
+                gameActive = false;
+                return;
+            }
+            if (cells.every(cell => cell.textContent !== '')) {
+                status.textContent = "It's a Draw!";
+                gameActive = false;
+                return;
+            }
+            currentPlayer = 'O';
+            status.textContent = "AI's Turn";
+            setTimeout(aiMove, 500);
+        }
+        
+        function aiMove() {
+            if (!gameActive) return;
+            let availableCells = cells.filter(cell => cell.textContent === '');
+            if (availableCells.length === 0) return;
+            let randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
+            randomCell.textContent = 'O';
+            randomCell.classList.add('taken');
+            if (checkWin()) {
+                status.textContent = "AI Wins!";
+                gameActive = false;
+                return;
+            }
+            if (cells.every(cell => cell.textContent !== '')) {
+                status.textContent = "It's a Draw!";
+                gameActive = false;
+                return;
+            }
+            currentPlayer = 'X';
+            status.textContent = "Player X's Turn";
+        }
+        
+        function checkWin() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6]             // Diagonals
+            ];
+            return winPatterns.some(pattern => {
+                const [a, b, c] = pattern;
+                return cells[a].textContent !== '' &&
+                       cells[a].textContent === cells[b].textContent &&
+                       cells[a].textContent === cells[c].textContent;
+            });
+        }
+        
+        function restartGame() {
+            currentPlayer = 'X';
+            gameActive = true;
+            status.textContent = "Player X's Turn";
+            createBoard();
+        }
+        
+        createBoard();
+    </script>
 </body>
 </html>
