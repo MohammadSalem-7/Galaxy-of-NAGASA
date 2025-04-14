@@ -18,7 +18,7 @@
             color: black; /* تغيير لون الخط إلى الأسود */
         }
         body {
-            background: url('https://assets.onecompiler.app/42ydxf8da/43ab8e573/00.webp') repeat;
+            background: url('https://assets.onecompiler.app/42ydxf8da/42z7st46n/image.png') repeat;
             text-align: center;a
             overflow: hidden;
         }
@@ -72,15 +72,78 @@
             text-decoration: none;
             color: black; /* التأكد من أن رابط الزر أيضًا باللون الأسود */
         }
+        nav {
+  margin-top: 10%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  position: fixed;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 2rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 1.5rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 50%; /* لجعلها دائرية */
+  transition: all 0.4s ease; /* انتقال سلس */
+  display: inline-block;
+  white-space: nowrap;
+  background: linear-gradient(
+    45deg,
+    rgb(255, 0, 255),
+    rgb(0, 255, 255),
+    rgb(255, 0, 255)
+  );
+  background-size: 400% 400%;
+  border: 2px solid transparent;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+nav ul li a:hover {
+  background-position: 100% 0; /* تحريك التدرج عند التفاعل */
+  transform: scale(1.2);
+  padding: 1.2rem 1.7rem; /* زيادة الحجم لتكبير الدائرة */
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+nav ul li a:active {
+  transform: scale(1);
+}
+
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="home.html">الرئيسية</a>
-        <a href="games.html">الألعاب</a>
-        <a href="members.html">الأعضاء</a>
-        <a href="exercises.html">التمارين</a>
-    </div>
+       <nav>
+      <ul>
+      <li><a href="home.html">الرئيسية</a></li>
+        <li><a href="members.html">الأعضاء</a></li>
+        <li><a href="games.html">الألعاب</a></li>
+        <li><a href="exercises.html">التمارين</a></li>
+    </nav>
     <div class="hero">
         <h1> Galaxy of NAGASA مرحبًا بك في</h1>
         <p>استمتع بأفضل تجربة مستقبلية مع الألعاب والتمارين الفريدة</p>
