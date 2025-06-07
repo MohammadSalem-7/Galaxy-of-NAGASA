@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <title>Galaxy of NAGASA: ملحمة المؤسسين</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: url('https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Noto Sans Arabic', Arial, sans-serif;
+      color: white;
+      touch-action: manipulation;
+      direction: rtl;
+    }
+    #gameContainer {
+      width: 90vw;
+      max-width: 600px;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      text-align: right;
+    }
+    #storyText {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .choice {
+      display: block;
+      background: #1e90ff;
+      color: white;
+      padding: 1rem;
+      margin: 0.5rem auto;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .choice:hover {
+      background: #4682b4;
+    }
+    #score {
+      position: absolute;
+      top: 2vh;
+      right: 2vw;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      #storyText {
+        font-size: 1rem;
+      }
+      .choice {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+      }
+      #score {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body>
+  <div id="score">التقدم: 0%</div>
+  <div id="gameContainer">
+    <div id="storyText"></div>
+    <div id="choices"></div>
+  </div>
+  <script>
+    let bgMusic, clickSound;
+    let progress = 0;
+    let currentNode = 0;
+
+    function preloadSounds() {
+      bgMusic = new Howl({
+        src: ['https://cdn.pixabay.com/audio/2022/03/10/audio_3b1c8e6f2a.mp3'],
+        loop: true,
+        volume: 0.5
+      });
+      clickSound = new Howl({
+        src: ['https://cdn.pixabay.com/audio/2022/03/10/audio_5a77e065f2.mp3']
+      });
+      bgMusic.play();
+    }
+
+    const storyNodes = [
+      {
+        text: "في عام 3029 ميلادية، انهارت الإمبراطورية البشرية، تاركة المجرة في فوضى. Mohammad Salem، العالم الطموح، يحلم بتوحيد الكواكب تحت راية Galaxy of NAGASA. أنت دبلوماسي شاب مكلف بمساعدته في جمع المؤسسين العشرة. من أين تبدأ؟",
+        choices: [
+          { text: "الاتصال بعائشة، مهندسة على كوكب زوراك.", nextNode: 1 },
+          { text: "البحث عن طارق، استراتيجي على كوكب فيون.", nextNode: 2 }
+        ]
+      },
+      {
+        text: "وافقت عائشة على الانضمام لكنها تطالب بموارد لبناء نواة طاقة جديدة. ماذا تفعل؟",
+        choices: [
+          { text: "التفاوض مع مستعمرة تعدين قريبة.", nextNode: 3 },
+          { text: "البحث عن تقنية بديلة على كوكب كويفا.", nextNode: 4 }
+        ]
+      },
+      {
+        text: "طارق متشكك في رؤية Mohammad Salem لكنه يقدم نصائح استراتيجية. كيف تقنعه؟",
+        choices: [
+          { text: "عرض مخطط Galaxy of NAGASA.", nextNode: 5 },
+          { text: "دعوته للقاء Mohammad مباشرة.", nextNode: 6 }
+        ]
+      },
+      {
+        text: "وافقت المستعمرة لكنها تريد مقعدًا بين المؤسسين. ماذا تفعل؟",
+        choices: [
+          { text: "قبول شروطهم.", nextNode: 7 },
+          { text: "رفض العرض والبحث عن مصدر آخر.", nextNode: 8 }
+        ]
+      },
+      {
+        text: "تقنية كويفا تجريبية. عائشة متحمسة لكنها تحذر من المخاطر. ماذا تفعل؟",
+        choices: [
+          { text: "اختبار التقنية أولاً.", nextNode: 9 },
+          { text: "الوثوق بعائشة والمضي قدمًا.", nextNode: 10 }
+        ]
+      },
+      {
+        text: "أعجب طارق بالمخطط وانضم. يقترح تجنيد لينا، عالمة بيئة. ماذا تفعل؟",
+        choices: [
+          { text: "زيارة لينا على كوكب سيلفا.", nextNode: 11 },
+          { text: "التركيز على مؤسس آخر أولاً.", nextNode: 12 }
+        ]
+      },
+      {
+        text: "التقى طارق بـ Mohammad وألهمه. انضم واقترح تجنيد لينا. ماذا تفعل؟",
+        choices: [
+          { text: "زيارة لينا على كوكب سيلفا.", nextNode: 11 },
+          { text: "التركيز على مؤسس آخر أولاً.", nextNode: 12 }
+        ]
+      },
+      {
+        text: "انضمت المستعمرة، وبنت عائشة النواة. تقدم ملحوظ! تحتاج الآن إلى دبلوماسي. ماذا تفعل؟",
+        choices: [
+          { text: "تجنيد زارا من كوكب نيكسيس.", nextNode: 13 },
+          { text: "مواصلة بناء الموارد.", nextNode: 14 }
+        ]
+      },
+      {
+        text: "وجدت مصدرًا آخر، لكن ذلك أخر التقدم. عائشة محبطة. ماذا تفعل؟",
+        choices: [
+          { text: "الاعتذار وتجنيد زارا، دبلوماسية.", nextNode: 13 },
+          { text: "الاستمرار بموارد محدودة.", nextNode: 15 }
+        ]
+      },
+      {
+        text: "كشف الاختبار عن عيوب، مما أخر التقدم. تقترح عائشة تجنيد زارا للدبلوماسية. ماذا تفعل؟",
+        choices: [
+          { text: "الاتصال بزارا.", nextNode: 13 },
+          { text: "التركيز على إصلاح التقنية.", nextNode: 15 }
+        ]
+      },
+      {
+        text: "نجحت التقنية! عائشة متحمسة وانضمت نهائيًا. تحتاج إلى دبلوماسي. ماذا تفعل؟",
+        choices: [
+          { text: "تجنيد زارا من كوكب نيكسيس.", nextNode: 13 },
+          { text: "مواصلة بناء الموارد.", nextNode: 14 }
+        ]
+      },
+      {
+        text: "انضمت لينا واقترحت مجلسًا مجريًا. وافق Mohammad. ماذا تفعل؟",
+        choices: [
+          { text: "التخطيط لاجتماع المجلس.", nextNode: 16 },
+          { text: "تجنيد المزيد من المؤسسين أولاً.", nextNode: 17 }
+        ]
+      },
+      {
+        text: "ركزت على مؤسس آخر، عمر، خبير أمني. إنه متردد. ماذا تفعل؟",
+        choices: [
+          { text: "عرض دور قيادي عليه.", nextNode: 18 },
+          { text: "عرض رؤية Galaxy of NAGASA.", nextNode: 19 }
+        ]
+      },
+      {
+        text: "انضمت زارا وقوّت التحالفات. خمسة مؤسسين الآن معك. ماذا تفعل؟",
+        choices: [
+          { text: "تجنيد عمر، خبير أمني.", nextNode: 18 },
+          { text: "التخطيط لاجتماع المجلس.", nextNode: 16 }
+        ]
+      },
+      {
+        text: "نمت الموارد، لكنك تحتاج إلى دبلوماسية. زارا متاحة. ماذا تفعل؟",
+        choices: [
+          { text: "الاتصال بزارا.", nextNode: 13 },
+          { text: "تجنيد عمر، خبير أمني.", nextNode: 18 }
+        ]
+      },
+      {
+        text: "تباطأ التقدم، لكنك تستمر. يقترح Mohammad تجنيد عمر. ماذا تفعل؟",
+        choices: [
+          { text: "الاتصال بعمر.", nextNode: 18 },
+          { text: "التركيز على الدبلوماسية مع زارا.", nextNode: 13 }
+        ]
+      },
+      {
+        text: "جميع المؤسسين جاهزون! دعا Mohammad إلى أول مجلس Galaxy of NAGASA على كوكب محايد. لقد نجحت! التقدم: 100%",
+        choices: []
+      },
+      {
+        text: "جنّدت المؤسسين المتبقين: طبيب، مؤرخ، وطيار. Mohammad جاهز للمجلس. ماذا تفعل؟",
+        choices: [
+          { text: "التخطيط لاجتماع المجلس.", nextNode: 16 }
+        ]
+      },
+      {
+        text: "انضم عمر بعد قبول دور قيادي. تحتاج إلى مؤسسين آخرين. ماذا تفعل؟",
+        choices: [
+          { text: "تجنيد طبيب.", nextNode: 17 },
+          { text: "تجنيد مؤرخ.", nextNode: 17 }
+        ]
+      },
+      {
+        text: "انضم عمر بعد رؤية الرؤية. تحتاج إلى مؤسسين آخرين. ماذا تفعل؟",
+        choices: [
+          { text: "تجنيد طبيب.", nextNode: 17 },
+          { text: "تجنيد مؤرخ.", nextNode: 17 }
+        ]
+      }
+    ];
+
+    function displayNode(nodeIndex) {
+      const node = storyNodes[nodeIndex];
+      document.getElementById('storyText').innerText = node.text;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      node.choices.forEach(choice => {
+        const button = document.createElement('button');
+        button.className = 'choice';
+        button.innerText = choice.text;
+        button.onclick = () => {
+          clickSound.play();
+          currentNode = choice.nextNode;
+          progress = Math.min(progress + 5, 100);
+          document.getElementById('score').innerText = `التقدم: ${progress}%`;
+          displayNode(currentNode);
+        };
+        choicesDiv.appendChild(button);
+      });
+      if (node.choices.length === 0) {
+        bgMusic.stop();
+      }
+    }
+
+    window.onload = () => {
+      preloadSounds();
+      displayNode(0);
+    };
+  </script>
+</body>
+</html>
